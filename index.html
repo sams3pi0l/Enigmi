@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e131a">
+  <meta name="description" content="Cento enigmi di logica e matematica. Nessuna fretta. Solo ragionamento.">
+  <title>Enigmi — 100 sfide di logica</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="levels.js" defer></script>
+  <script src="game.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div id="game" class="shell">
+    <aside class="sidebar" aria-label="Percorso degli enigmi">
+      <header class="brand"><span class="brand-icon" aria-hidden="true">∑</span><div><strong>ENIGMI</strong><p>Ogni enigma ha una sua regola</p></div></header>
+      <h2 class="eyebrow">Il tuo percorso</h2>
+      <nav id="levels" class="levels" aria-label="Livelli"></nav>
+      <nav class="pages" aria-label="Gruppi di livelli">
+        <button id="group-prev" aria-label="Gruppo precedente">‹</button>
+        <div id="ranges"></div>
+        <button id="group-next" aria-label="Gruppo successivo">›</button>
+      </nav>
+      <div class="progress-area"><p id="progress-label"></p><progress id="progress" max="100" value="0" aria-label="Enigmi completati"></progress><p class="motto">Nessuna fretta. Solo ragionamento.</p></div>
+    </aside>
+    <main>
+      <div class="topline"><span class="eyebrow">Logica · Numeri · Intuizione</span><button id="reset" class="subtle">Azzera</button></div>
+      <header class="puzzle-heading"><div><h1 id="title"></h1><p id="instruction"></p></div><span id="level-number"></span></header>
+      <div class="play-area">
+        <section class="puzzle-column" aria-label="Enigma e risposta">
+          <div class="puzzle-card"><img id="puzzle" alt="" draggable="false"></div>
+          <form id="answer-form" novalidate>
+            <label for="answer" class="eyebrow">La tua risposta</label>
+            <div class="answer-row"><input id="answer" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" placeholder="Scrivi un numero…" aria-describedby="feedback"><button class="primary" type="submit">Verifica <span aria-hidden="true">✓</span></button></div>
+          </form>
+          <div id="keypad" class="keypad" aria-label="Tastierino numerico"></div>
+          <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        </section>
+        <section class="help-column" aria-label="Aiuti e navigazione">
+          <div class="help-slot"><div id="help-panel" class="help-panel" hidden><div class="help-header"><h2 id="help-title" class="eyebrow"></h2><button id="help-close" aria-label="Chiudi aiuto">×</button></div><img id="help-image" alt=""><p id="help-caption"></p></div></div>
+          <div class="paired"><button id="hint" aria-controls="help-panel" aria-expanded="false">Indizio</button><button id="solution" aria-controls="help-panel" aria-expanded="false">Soluzione</button></div>
+          <div class="paired navigation"><button id="previous">Precedente</button><button id="next">Successivo</button></div>
+        </section>
+      </div>
+      <p id="storage-warning" class="storage-warning" role="status" hidden>Il browser non consente di salvare i progressi. Potrai giocare, ma questa sessione non verrà conservata.</p>
+    </main>
+  </div>
+  <section id="ending" class="ending" aria-labelledby="ending-title" hidden><p class="eyebrow">100 / 100 enigmi risolti</p><h1 id="ending-title" tabindex="-1">Le hai trovate tutte.</h1><p>Ogni enigma ha una sua regola.</p><div class="end-word">THE END</div><button id="return" class="primary">Torna agli enigmi</button></section>
+  <dialog id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description"><h2 id="reset-title">Azzerare i progressi?</h2><p id="reset-description">Tutti i livelli saranno nuovamente da risolvere. L'operazione non si può annullare.</p><div class="dialog-actions"><button id="reset-cancel" autofocus>Annulla</button><button id="reset-confirm" class="danger">Azzera tutto</button></div></dialog>
+  <noscript>Per giocare a Enigmi devi abilitare JavaScript nel browser.</noscript>
+</body>
+</html>
