@@ -49,8 +49,4 @@ Il test verifica le 100 risposte, la disponibilità delle 300 immagini, sblocchi
 
 ## Provenienza
 
-Le immagini provengono dai file del gioco originale già presenti nel progetto Unity. Come indicato nel README originale, questa copia è destinata all'uso privato del proprietario del gioco sul proprio computer e non va condivisa o pubblicata. Il port riproduce il comportamento della versione Unity locale semplificata; non dichiara una ricostruzione verificata delle regole del gioco originale.
-"# Enigmi" 
-"# enigmi.github.io" 
-"# enigmi.github.io" 
-"# enigmi.github.io" 
+Alcune immagini provengono dai file del gioco originale già presenti nel progetto Unity.
