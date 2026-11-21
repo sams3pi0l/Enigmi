@@ -9,14 +9,21 @@
   } catch { $('storage-warning').hidden = false; }
   const game = new EnigmiGame(ENIGMI_LEVELS, saved);
   const defaultFeedback = 'Puoi usare anche la tastiera: numeri, Invio e Backspace.';
+  let feedbackTimer;
   const lock = '<svg class="lock" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7V5a4 4 0 0 1 8 0v2"/><rect x="1" y="7" width="14" height="10" rx="2"/><path d="M8 11v3"/></svg>';
   function save() {
     try { localStorage.setItem(storageKey, JSON.stringify({version: 1, solved: game.solved})); $('storage-warning').hidden = true; }
     catch { $('storage-warning').hidden = false; }
   }
   function feedback(message = defaultFeedback, kind = '') {
-    $('feedback').textContent = message;
-    $('feedback').className = 'feedback ' + kind;
+    clearTimeout(feedbackTimer);
+    const element = $('feedback');
+    const repeatedError = kind === 'error' && element.classList.contains('error');
+    element.className = 'feedback ' + kind;
+    element.textContent = repeatedError ? '' : message;
+    if (repeatedError) {
+      feedbackTimer = setTimeout(() => { element.textContent = message; }, 160);
+    }
   }
   function renderNavigation() {
     $('levels').replaceChildren();
@@ -108,5 +115,34 @@
     else if (!inAnswer && e.key === 'Backspace') { e.preventDefault(); setInput(game.input.slice(0, -1)); }
     else if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') { e.preventDefault(); submit(); }
   });
+  // Capture before navigation handlers replace the clicked button.
+  document.addEventListener('click', e => {
+    const button = e.target.closest('button');
+    if (!button || button.disabled || !e.isTrusted) return;
+    const touch = e.pointerType === 'touch' ||
+      (e.pointerType == null && e.detail > 0 && matchMedia('(pointer: coarse)').matches);
+    if (touch && typeof navigator.vibrate === 'function') {
+      try { navigator.vibrate(12); } catch { /* Optional device feedback. */ }
+    }
+  }, true);
+  const fullscreenDisplay = matchMedia('(display-mode: fullscreen)');
+  function updateFullscreenButton() {
+    const active = Boolean(document.fullscreenElement);
+    $('fullscreen').hidden = !document.fullscreenEnabled || (fullscreenDisplay.matches && !active);
+    $('fullscreen').textContent = active ? 'Esci da schermo intero' : 'Schermo intero';
+    $('fullscreen').setAttribute('aria-pressed', String(active));
+  }
+  $('fullscreen').onclick = async () => {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
+    } catch {
+      feedback('Il browser non consente lo schermo intero in questo momento.');
+    }
+    updateFullscreenButton();
+  };
+  document.addEventListener('fullscreenchange', updateFullscreenButton);
+  fullscreenDisplay.addEventListener('change', updateFullscreenButton);
+  updateFullscreenButton();
   renderLevel();
 })();

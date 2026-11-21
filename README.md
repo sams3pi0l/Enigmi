@@ -22,6 +22,14 @@ Poi visita `http://127.0.0.1:8080`. Chiudi il server con Ctrl+C. L'apertura dire
 - I progressi sono salvati dopo una risposta corretta. Alla riapertura riparti dal primo enigma non risolto; se sono tutti completati, dal primo.
 - Azzera richiede una conferma. Annulla o Esc chiude la conferma senza modificare i progressi.
 
+## Mobile e installazione
+
+- Il pulsante **Schermo intero** compare nei browser che supportano questa funzione; permette anche di uscire dalla modalità a schermo intero.
+- Il manifest e le icone PNG consentono ai browser compatibili di installare il gioco come app, con avvio a schermo intero (o nella modalità alternativa supportata dal browser). Pubblica anche `manifest.webmanifest` e `assets/icons/` insieme agli altri file, su HTTPS. Poi ricarica il sito su Android/Chrome e riprova **Installa e crea scorciatoia**. L'installazione non è disponibile aprendo un file locale.
+- Non è previsto un service worker: l'app installata richiede la connessione per caricare il sito; non viene aggiunta una cache offline gestita dal gioco.
+- I tocchi sui pulsanti abilitati producono una breve vibrazione se supportata dal browser e dal dispositivo; le impostazioni del sistema possono impedirla. Safari su iPhone non supporta questa API.
+- Dopo errori consecutivi, **Verifica** svuota il messaggio rosso per 160 ms e poi mostra il nuovo errore, anche quando il testo è identico.
+
 ## Salvataggi
 
 Si usa `localStorage`, chiave `enigmi.web.progress.v1`, nel browser e nell'origine corrente. Non viene utilizzato il Registro di Windows e non si importano automaticamente i progressi Unity. Browser, profili, porte e indirizzi diversi hanno salvataggi separati. La cancellazione dei dati del sito elimina i progressi; in navigazione privata possono durare soltanto per la sessione. Se il browser impedisce il salvataggio compare un avviso.

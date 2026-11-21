@@ -7,6 +7,8 @@
   <meta name="description" content="Cento enigmi di logica e matematica. Nessuna fretta. Solo ragionamento.">
   <title>Enigmi — 100 sfide di logica</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="stylesheet" href="styles.css">
   <script src="levels.js" defer></script>
   <script src="game.js" defer></script>
@@ -26,7 +28,7 @@
       <div class="progress-area"><p id="progress-label"></p><progress id="progress" max="100" value="0" aria-label="Enigmi completati"></progress><p class="motto">Nessuna fretta. Solo ragionamento.</p></div>
     </aside>
     <main>
-      <div class="topline"><span class="eyebrow">Logica · Numeri · Intuizione</span><button id="reset" class="subtle">Azzera</button></div>
+      <div class="topline"><span class="eyebrow">Logica · Numeri · Intuizione</span><div class="top-actions"><button id="fullscreen" class="subtle" aria-pressed="false" hidden>Schermo intero</button><button id="reset" class="subtle">Azzera</button></div></div>
       <header class="puzzle-heading"><div><h1 id="title"></h1><p id="instruction"></p></div><span id="level-number"></span></header>
       <div class="play-area">
         <section class="puzzle-column" aria-label="Enigma e risposta">
