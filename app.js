@@ -125,24 +125,5 @@
       try { navigator.vibrate(12); } catch { /* Optional device feedback. */ }
     }
   }, true);
-  const fullscreenDisplay = matchMedia('(display-mode: fullscreen)');
-  function updateFullscreenButton() {
-    const active = Boolean(document.fullscreenElement);
-    $('fullscreen').hidden = !document.fullscreenEnabled || (fullscreenDisplay.matches && !active);
-    $('fullscreen').textContent = active ? 'Esci da schermo intero' : 'Schermo intero';
-    $('fullscreen').setAttribute('aria-pressed', String(active));
-  }
-  $('fullscreen').onclick = async () => {
-    try {
-      if (document.fullscreenElement) await document.exitFullscreen();
-      else await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
-    } catch {
-      feedback('Il browser non consente lo schermo intero in questo momento.');
-    }
-    updateFullscreenButton();
-  };
-  document.addEventListener('fullscreenchange', updateFullscreenButton);
-  fullscreenDisplay.addEventListener('change', updateFullscreenButton);
-  updateFullscreenButton();
   renderLevel();
 })();

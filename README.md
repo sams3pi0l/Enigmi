@@ -24,7 +24,7 @@ Poi visita `http://127.0.0.1:8080`. Chiudi il server con Ctrl+C. L'apertura dire
 
 ## Mobile e installazione
 
-- Il pulsante **Schermo intero** compare nei browser che supportano questa funzione; permette anche di uscire dalla modalità a schermo intero.
+- Su desktop puoi usare **F11** per attivare o disattivare lo schermo intero del browser.
 - Il manifest e le icone PNG consentono ai browser compatibili di installare il gioco come app, con avvio a schermo intero (o nella modalità alternativa supportata dal browser). Pubblica anche `manifest.webmanifest` e `assets/icons/` insieme agli altri file, su HTTPS. Poi ricarica il sito su Android/Chrome e riprova **Installa e crea scorciatoia**. L'installazione non è disponibile aprendo un file locale.
 - Non è previsto un service worker: l'app installata richiede la connessione per caricare il sito; non viene aggiunta una cache offline gestita dal gioco.
 - I tocchi sui pulsanti abilitati producono una breve vibrazione se supportata dal browser e dal dispositivo; le impostazioni del sistema possono impedirla. Safari su iPhone non supporta questa API.
